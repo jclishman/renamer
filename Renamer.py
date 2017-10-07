@@ -7,7 +7,7 @@ import argparse
 from Episode import Episode
 from APIService import APIService
 
-# Filetype argument
+# Filetype & Split argument
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", type=str, help="select filetype")
 parser.add_argument("-s", action="store_true", help="splits titles on spaces instead of periods")
