@@ -11,12 +11,18 @@ class Episode():
 	ident = None
 	original_filename = None
 
-	def __init__(self, episode_str):
+	def __init__(self, episode_str, switch_split_modes):
 		
 		print (episode_str)
-		self.original_filename = episode_str
+		self.original_filename = episode_str.strip("?")
 		ep_bits = episode_str.split('.')
-		identifier = re.compile('S[0-9]{1,2}E[0-9]{1,2}')
+		
+		if switch_split_modes:
+			ep_bits = ""
+			if ep_bits == "": ep_bits = episode_str.split(' ')
+
+		#print(ep_bits)
+		identifier = re.compile('[sS][0-9]{1,2}[eE][0-9]{1,2}')
 
 		found_ident = False
 		
