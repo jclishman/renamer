@@ -7,7 +7,7 @@ import glob
 import time
 import argparse
 from Episode import Episode
-from APIService import APIService
+from Service import Service
 
 # Filetype & Split argument
 parser = argparse.ArgumentParser()
@@ -49,20 +49,19 @@ for episode_obj in list_of_episode_objects:
 
     # Gets the ID of the show, and the raw season/episode numbers
 
-    show_id = APIService.getID(episode_obj.show)
+    show_id = Service.getID(episode_obj.show)
     season_str = str(episode_obj.get_season())
     episode_str = str(episode_obj.get_episode())
-    # show_str = str(episode_obj.get_show())
     ident_str = str(episode_obj.get_ident()).upper()
 
     # print("\nAPI ID: " + str(show_id))
 
-    show_str = APIService.getShowTitle(show_id)
+    show_str = Service.getShowTitle(show_id)
     print("\nShow Title: " + show_str)
     print("Season Number: " + season_str)
     print("Episode Number: " + episode_str)
 
-    title = APIService.getDetails(show_id, season_str, episode_str)
+    title = Service.getDetails(show_id, season_str, episode_str)
     title_clean = re.sub('[:?]', '', title)
     if title != title_clean:
         print("[WARNING] Episode title dirty, sanitizing")

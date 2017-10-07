@@ -5,7 +5,7 @@ import requests
 import json
 
 
-class APIService():
+class Service():
     @staticmethod
     def getID(show):
 
@@ -48,3 +48,9 @@ class APIService():
 
         # Returns title
         return data['name']
+
+
+    @staticmethod
+    def getUpdate():
+
+    	pass

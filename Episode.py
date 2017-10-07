@@ -21,8 +21,10 @@ class Episode():
             if ep_bits == "": ep_bits = episode_str.split(' ')
 
         # print(ep_bits)
-        identifier = re.compile('[sS][0-9]{1,2}[eE][0-9]{1,2}')
 
+        # Episode filename identifiers - Season number and episode number
+        # Fun regex fuckery
+        identifier = re.compile('[sS][0-9]{1,2}[eE][0-9]{1,2}|[0-9]{2}x[0-9]{2}|[0-9]{1}x[0-9]{2}|[0-9]{1}x[0-9]{1}')
         found_ident = False
 
         for i in ep_bits:
@@ -32,7 +34,6 @@ class Episode():
                 if identifier.match(i):
                     found_ident = True
                     self.ident = i
-
 
                 else:
                     self.show = i if self.show is None else self.show + ' ' + i
@@ -51,10 +52,11 @@ class Episode():
 
     def get_season(self):
 
+        # Could almost definitely be optimized more
+        # Regex test 1
         ident_reg = re.compile('[sS]([0-9]{1,2})')
         ident_num = ident_reg.match(self.ident)
 
-        # Basic error handling
         if ident_num is None:
             raise Exception("Error: No season regex match")
 
@@ -62,7 +64,7 @@ class Episode():
 
     def get_episode(self):
 
-        ident_reg = re.compile('[eE]([0-9]{1,2})')
+        ident_reg = re.compile('[eE]([0-9][0-9])')
         ident_num = ident_reg.search(self.ident)
 
         # Basic error handling
