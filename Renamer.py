@@ -13,6 +13,8 @@ from Service import Service
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", type=str, help="select filetype")
 parser.add_argument("-s", action="store_true", help="splits titles on spaces instead of periods")
+parser.add_argument("-u", action="store_true", help="updates")
+
 args = parser.parse_args()
 
 # Default filetype, unless specified otherwise
