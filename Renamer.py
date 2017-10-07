@@ -18,6 +18,7 @@ args = parser.parse_args()
 # Default filetype, unless specified otherwise
 filetype = '.mkv'
 switch_split_modes = False
+counter = 0
 
 if args.f:
     filetype = '.' + args.f
@@ -75,6 +76,7 @@ for episode_obj in list_of_episode_objects:
 
     # print (episode_obj.get_orig_filename())
     os.rename(episode_obj.get_orig_filename(), file_name)
+    counter += 1
 
 elapsed_time = time.time() - start_time
-print("\nAll done! " + episode_str + " episode names were changed. Took " + str(round(elapsed_time, 2)) + " seconds.")
+print("\nAll done! " + str(counter) + " episode names were changed. Took " + str(round(elapsed_time, 2)) + " seconds.")
