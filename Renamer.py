@@ -28,6 +28,9 @@ if args.f:
 if args.s:
     print("Changing split mode to spaces")
     switch_split_modes = True
+if args.u:
+    print("Updating...")
+    Service.getUpdate()
 
 sel = input('\nEnter directory: ')
 os.chdir(sel)
