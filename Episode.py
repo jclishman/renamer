@@ -9,11 +9,12 @@ class Episode():
 
 	show = None
 	ident = None
-	title = None
+	original_filename = None
 
 	def __init__(self, episode_str):
 		
 		print (episode_str)
+		self.original_filename = episode_str
 		ep_bits = episode_str.split('.')
 		identifier = re.compile('S[0-9]{1,2}E[0-9]{1,2}')
 
@@ -37,3 +38,34 @@ class Episode():
 
 	def __str__(self):
 		return ("show: " + self.show + "\n" + "ident: " + self.ident + "\n")
+
+	def get_orig_filename(self):
+		return self.original_filename
+
+	def get_ident(self):
+		return self.ident
+
+	def get_show(self):
+		return self.show
+
+	def get_season(self):
+
+		ident_reg = re.compile('[sS]([0-9]{1,2})')
+		ident_num = ident_reg.match(self.ident)
+		
+		# Basic error handling
+		if ident_num == None:
+			raise Exception("Error: No season regex match")
+
+		return int(ident_num.group(1))
+
+	def get_episode(self):
+
+		ident_reg = re.compile('[eE]([0-9]{1,2})')
+		ident_num = ident_reg.search(self.ident)
+		
+		# Basic error handling
+		if ident_num == None:
+			raise Exception("Error: No episode regex match")
+
+		return int(ident_num.group(1))
