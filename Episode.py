@@ -1,77 +1,72 @@
+#!/usr/bin/python
 # Torrent Renamer
 
 import re
 
 
-
-
 class Episode():
+    show = None
+    ident = None
+    original_filename = None
 
-	show = None
-	ident = None
-	original_filename = None
+    def __init__(self, episode_str, switch_split_modes):
 
-	def __init__(self, episode_str, switch_split_modes):
-		
-		print (episode_str)
-		self.original_filename = episode_str.strip("?")
-		ep_bits = episode_str.split('.')
-		
-		if switch_split_modes:
-			ep_bits = ""
-			if ep_bits == "": ep_bits = episode_str.split(' ')
+        print(episode_str)
+        self.original_filename = episode_str
+        episode_str = episode_str[:-4]
+        ep_bits = episode_str.split('.')
 
-		#print(ep_bits)
-		identifier = re.compile('[sS][0-9]{1,2}[eE][0-9]{1,2}')
+        if switch_split_modes:
+            ep_bits = ""
+            if ep_bits == "": ep_bits = episode_str.split(' ')
 
-		found_ident = False
-		
+        # print(ep_bits)
+        identifier = re.compile('[sS][0-9]{1,2}[eE][0-9]{1,2}')
 
-		for i in ep_bits:
+        found_ident = False
 
-			if not found_ident:
-				
-				if identifier.match(i):
-					found_ident = True
-					self.ident = i
-					
+        for i in ep_bits:
 
-				else:
-					self.show = i if self.show == None else self.show + ' ' + i
-					
+            if not found_ident:
 
-				
+                if identifier.match(i):
+                    found_ident = True
+                    self.ident = i
 
-	def __str__(self):
-		return ("show: " + self.show + "\n" + "ident: " + self.ident + "\n")
 
-	def get_orig_filename(self):
-		return self.original_filename
+                else:
+                    self.show = i if self.show is None else self.show + ' ' + i
 
-	def get_ident(self):
-		return self.ident
+    def __str__(self):
+        return "show: " + self.show + "\n" + "ident: " + self.ident + "\n"
 
-	def get_show(self):
-		return self.show
+    def get_orig_filename(self):
+        return self.original_filename
 
-	def get_season(self):
+    def get_ident(self):
+        return self.ident
 
-		ident_reg = re.compile('[sS]([0-9]{1,2})')
-		ident_num = ident_reg.match(self.ident)
-		
-		# Basic error handling
-		if ident_num == None:
-			raise Exception("Error: No season regex match")
+    def get_show(self):
+        return self.show
 
-		return int(ident_num.group(1))
+    def get_season(self):
 
-	def get_episode(self):
+        ident_reg = re.compile('[sS]([0-9]{1,2})')
+        ident_num = ident_reg.match(self.ident)
 
-		ident_reg = re.compile('[eE]([0-9]{1,2})')
-		ident_num = ident_reg.search(self.ident)
-		
-		# Basic error handling
-		if ident_num == None:
-			raise Exception("Error: No episode regex match")
+        # Basic error handling
+        if ident_num is None:
+            raise Exception("Error: No season regex match")
 
-		return int(ident_num.group(1))
+        return int(ident_num.group(1))
+
+    def get_episode(self):
+
+        ident_reg = re.compile('[eE]([0-9]{1,2})')
+        ident_num = ident_reg.search(self.ident)
+
+        # Basic error handling
+        if ident_num is None:
+            raise Exception("Error: No episode regex match")
+
+        return int(ident_num.group(1))

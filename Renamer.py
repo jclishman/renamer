@@ -1,6 +1,8 @@
+#!/usr/bin/python
 # Torrent Renamer
 
 import os
+import re
 import glob
 import time
 import argparse
@@ -18,14 +20,13 @@ filetype = '.mkv'
 switch_split_modes = False
 
 if args.f:
-	filetype = '.' + args.f
-	print("Filetype changed to: " + args.f)
+    filetype = '.' + args.f
+    print("Filetype changed to: " + args.f)
 if args.s:
-	print("Changing split mode to spaces")
-	switch_split_modes = True
+    print("Changing split mode to spaces")
+    switch_split_modes = True
 
 sel = input('\nEnter directory: ')
-
 os.chdir(sel)
 print("Changed to: " + os.getcwd())
 
@@ -33,46 +34,47 @@ start_time = time.time()
 list_of_episode_strings = glob.glob('*' + filetype)
 list_of_episode_objects = []
 
-print ("\n-----LIST OF EPISODES-----\n")
+print("\n-----LIST OF EPISODES-----\n")
 for ep_str in list_of_episode_strings:
-	ep = Episode(ep_str, switch_split_modes)
-	list_of_episode_objects.append(ep)
+    ep = Episode(ep_str, switch_split_modes)
+    list_of_episode_objects.append(ep)
 
-	if len(list_of_episode_objects) == 0:
-		raise Exception("Error: No files found")
-	#print(ep)
-
-
+    if len(list_of_episode_objects) == 0:
+        raise Exception("Error: No files found")
+        # print(ep)
 
 print("\n-----DATA-----")
 for episode_obj in list_of_episode_objects:
 
-	# Gets the ID of the show, and the raw season/episode numbers
-	
+    # Gets the ID of the show, and the raw season/episode numbers
 
-	show_id = APIService.getID(episode_obj.show)
-	season_str = str(episode_obj.get_season())
-	episode_str = str(episode_obj.get_episode())
-	#show_str = str(episode_obj.get_show())
-	ident_str = str(episode_obj.get_ident()).upper()
+    show_id = APIService.getID(episode_obj.show)
+    season_str = str(episode_obj.get_season())
+    episode_str = str(episode_obj.get_episode())
+    # show_str = str(episode_obj.get_show())
+    ident_str = str(episode_obj.get_ident()).upper()
 
-	#print("\nAPI ID: " + str(show_id))
+    # print("\nAPI ID: " + str(show_id))
 
-	show_str = APIService.getShowTitle(show_id)
-	print("\nShow Title: " + show_str)
-	print("Season Number: " + season_str)
-	print("Episode Number: " + episode_str)
+    show_str = APIService.getShowTitle(show_id)
+    print("\nShow Title: " + show_str)
+    print("Season Number: " + season_str)
+    print("Episode Number: " + episode_str)
 
-	title = APIService.getDetails(show_id, season_str, episode_str)
-	print ("Episode Title: " + title)
+    title = APIService.getDetails(show_id, season_str, episode_str)
+    title_clean = re.sub('[:?]', '', title)
+    if title != title_clean:
+        print("[WARNING] Episode title dirty, sanitizing")
 
-	# Creates the file name
-	file_name = show_str + ' ' + ident_str + ' - ' + title.strip("?") + filetype
-	print ("Fixed File Name: " + file_name) 
-	
-	#print (episode_obj.get_orig_filename())
-	os.rename(episode_obj.get_orig_filename(), file_name)
+    print("Episode Title: " + title_clean)
 
+    # Creates the file name
+    file_name = show_str + ' ' + ident_str + ' - ' + title_clean + filetype
+
+    print("Fixed File Name: " + file_name)
+
+    # print (episode_obj.get_orig_filename())
+    os.rename(episode_obj.get_orig_filename(), file_name)
 
 elapsed_time = time.time() - start_time
 print("\nAll done! " + episode_str + " episode names were changed. Took " + str(round(elapsed_time, 2)) + " seconds.")
