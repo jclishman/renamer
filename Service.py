@@ -52,11 +52,10 @@ class Service():
 
     @staticmethod
     def getUpdate():
-
+       
         urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Service.py", "Service.py")
         print("Downloaded Service.py")
         urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Episode.py", "Episode.py")
         print("Downloaded Episode.py")
-    	urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Renamer.py", "renamer.py")
-		print("Downloaded renamer.py")
-		print("Update complete. Closing.")
+        urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Renamer.py", "renamer.py")
+        print("Update complete. Closing.")
