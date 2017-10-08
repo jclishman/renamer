@@ -85,7 +85,7 @@ class Service():
             print("Downloaded Episode.py")
             urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Renamer.py", "renamer.py")
             print("Update complete. Closing.")
-            exit()
+            
 
         else:
             print("Update aborted, exiting")
