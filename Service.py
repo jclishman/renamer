@@ -57,6 +57,7 @@ class Service():
     @staticmethod
     def getUpdate():
        
+
         # Downloads and opens README.md from master branch
         urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/README.md", "ren_temp.md")
         file = open('ren_temp.md')
@@ -90,3 +91,4 @@ class Service():
         else:
             print("Update aborted, exiting")
             exit()
+
