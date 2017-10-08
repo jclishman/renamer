@@ -2,5 +2,6 @@
 *.avi
 *.mp4
 *.pyc
+.idea
 __pycache__
 

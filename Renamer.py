@@ -6,13 +6,15 @@ import re
 import glob
 import time
 import argparse
-from Episode import Episode
+from episode import Episode
 from Service import Service
 
 # Filetype & Split argument
 parser = argparse.ArgumentParser()
 parser.add_argument("-f", type=str, help="select filetype")
 parser.add_argument("-s", action="store_true", help="splits titles on spaces instead of periods")
+parser.add_argument("-u", action="store_true", help="updates the script from master branch, use with caution")
+parser.add_argument("-v", action="store_true", help="version")
 args = parser.parse_args()
 
 # Default filetype, unless specified otherwise
@@ -26,6 +28,13 @@ if args.f:
 if args.s:
     print("Changing split mode to spaces")
     switch_split_modes = True
+if args.u:
+    print("Getting latest update...")
+    Service.getUpdate()
+    exit()
+if args.v:
+    print("Renamer v1.0.3")
+    exit()
 
 sel = input('\nEnter directory: ')
 os.chdir(sel)
