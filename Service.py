@@ -58,4 +58,5 @@ class Service():
         urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Episode.py", "Episode.py")
         print("Downloaded Episode.py")
         urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Renamer.py", "renamer.py")
+        print("Downloaded renamer.py")
         print("Update complete. Closing.")
