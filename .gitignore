@@ -4,5 +4,5 @@
 *.pyc
 *.xml
 *.iml
-__pycache__
--BACKUP-
+__pycache__/
+-BACKUP-/
