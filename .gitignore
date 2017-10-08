@@ -2,6 +2,7 @@
 *.avi
 *.mp4
 *.pyc
-/.idea
+*.xml
+*.iml
 __pycache__
 -BACKUP-
