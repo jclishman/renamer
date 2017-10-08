@@ -6,7 +6,7 @@ import re
 import glob
 import time
 import argparse
-from episode import Episode
+from Episode import Episode
 from Service import Service
 
 # Filetype & Split argument
@@ -17,24 +17,27 @@ parser.add_argument("-u", action="store_true", help="updates the script from mas
 parser.add_argument("-v", action="store_true", help="version")
 args = parser.parse_args()
 
-# Default filetype, unless specified otherwise
+# Default variables
 filetype = '.mkv'
 switch_split_modes = False
 counter = 0
+ver = "1.0.4"
 
 if args.f:
     filetype = '.' + args.f
     print("Filetype changed to: " + args.f)
+
 if args.s:
     print("Changing split mode to spaces")
     switch_split_modes = True
+
 if args.u:
-    print("Getting latest update...")
     Service.getUpdate()
-    exit()
+
 if args.v:
-    print("Renamer v1.0.3")
+    print("Renamer v" + ver)
     exit()
+
 
 sel = input('\nEnter directory: ')
 os.chdir(sel)
