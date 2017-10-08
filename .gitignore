@@ -2,6 +2,6 @@
 *.avi
 *.mp4
 *.pyc
-.idea
+/.idea
 __pycache__
 -BACKUP-
