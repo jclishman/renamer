@@ -6,7 +6,7 @@ import json
 import urllib
 import os
 import re
-ver = "1.0.4"
+ver = "1.0.5"
 
 
 class Service():
@@ -42,8 +42,7 @@ class Service():
     def getDetails(show_id, season, episode):
 
         # Requests JSON of show details
-        resp = requests.get(
-            'http://api.tvmaze.com/shows/' + str(show_id) + '/episodebynumber?season=' + season + '&number=' + episode)
+        resp = requests.get('http://api.tvmaze.com/shows/' + str(show_id) + '/episodebynumber?season=' + season + '&number=' + episode)
         data = resp.json()
 
         # Basic error handling
@@ -58,8 +57,9 @@ class Service():
     def getUpdate():
        
 
+        
         # Downloads and opens README.md from master branch
-        urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/README.md", "ren_temp.md")
+        urllib.request.urlretrieve("https://raw.githubusercontent.com/jclishman/Renamer/master/README.md", "ren_temp.md")
         file = open('ren_temp.md')
 
         # Gets the version number from the first line of README
@@ -71,7 +71,8 @@ class Service():
         os.remove("ren_temp.md")
 
         # Ouputs currently running version
-        update = raw_input("Currently on: v" + ver + "\nAre you sure? (y/n): ")
+
+        update = input("Currently on: v" + ver + "\nAre you sure? (y/n): ")
 
 
         if update.upper() == "Y":
@@ -80,11 +81,11 @@ class Service():
 
 
             # Downloads files
-            urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Service.py", "Service.py")
+            urllib.request.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Service.py", "Service.py")
             print("Downloaded Service.py")
-            urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Episode.py", "Episode.py")
+            urllib.request.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Episode.py", "Episode.py")
             print("Downloaded Episode.py")
-            urllib.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Renamer.py", "renamer.py")
+            urllib.request.urlretrieve ("https://raw.githubusercontent.com/jclishman/Renamer/master/Renamer.py", "renamer.py")
             print("Update complete. Closing.")
             exit()
 
