@@ -6,7 +6,7 @@ import json
 import urllib
 import os
 import re
-ver = "1.0.5"
+ver = "1.0.6"
 
 
 class Service():
@@ -68,6 +68,7 @@ class Service():
         print("\nMaster branch is: " + master_ver)
 
         # Deletes master branch README.md
+        file.close()
         os.remove("ren_temp.md")
 
         # Ouputs currently running version

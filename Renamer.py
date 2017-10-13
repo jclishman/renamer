@@ -21,7 +21,7 @@ args = parser.parse_args()
 filetype = '.mkv'
 switch_split_modes = False
 counter = 0
-ver = "1.0.5"
+ver = "1.0.6"
 
 if args.f:
     filetype = '.' + args.f

@@ -1,4 +1,4 @@
-# Renamer v1.0.5
+# Renamer v1.0.6
 
 Renames torrents of TV shows to a sane naming scheme.
 
