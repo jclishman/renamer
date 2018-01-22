@@ -6,7 +6,7 @@ import json
 import urllib
 import os
 import re
-ver = "1.0.6"
+ver = "1.0.7"
 
 
 class Service():

@@ -11,7 +11,6 @@ class Episode():
 
     def __init__(self, episode_str, switch_split_modes):
 
-        print(episode_str)
         self.original_filename = episode_str
         episode_str = episode_str[:-4]
         ep_bits = episode_str.split('.')

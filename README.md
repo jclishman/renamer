@@ -1,6 +1,6 @@
-# Renamer v1.0.6
+# Renamer v1.0.7
 
-Renames torrents of TV shows to a sane naming scheme.
+Recursively renames torrents of TV shows to a sane naming scheme.
 
 Requires Python 3.6, and the Requests module. Get it with `python -m pip install requests`
 
